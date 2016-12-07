@@ -96,7 +96,7 @@ public class MainActivity extends ListActivity {
         int id = item.getItemId();
 
         switch(id){
-            case R.id.btSearch:   buscarContacto();break;
+            case R.id.btPreferences:   abrirPreferencias();break;
             case R.id.btAddContacto:   abrirAddContacto();break;
         }
 
@@ -118,8 +118,9 @@ public class MainActivity extends ListActivity {
         setListAdapter(a);
     }
 
-    public void buscarContacto(){
-
+    public void abrirPreferencias(){
+        Intent i = new Intent(this, Preferencias.class);
+        startActivity(i);
     }
 
     public void abrirAddContacto(){

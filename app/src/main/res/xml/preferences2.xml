@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="DG"
+        android:title="Preferencias">
+
+        <ListPreference
+            android:key="Imagen"
+            android:title="Imagenes de perfil"
+            android:summary="Como elegir las fotos de los contactos"
+            android:defaultValue="1"
+            android:entries     ="@array/tipos_dispositivos"
+            android:entryValues ="@array/tipos_dispositivos"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

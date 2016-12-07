@@ -10,9 +10,9 @@
         android:id="@+id/btAddContacto" />
 
     <item
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="100"
-        android:title="Search"
+        android:title="Preferencias"
         app:showAsAction="always"
-        android:id="@+id/btSearch" />
+        android:id="@+id/btPreferences" />
 </menu>
