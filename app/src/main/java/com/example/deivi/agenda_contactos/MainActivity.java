@@ -1,8 +1,13 @@
 package com.example.deivi.agenda_contactos;
 
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +23,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends ListActivity {
@@ -25,6 +34,8 @@ public class MainActivity extends ListActivity {
     static Adaptador a;
     static ArrayList<Elemento> arrayList = new ArrayList();
     public static BDContactos bd;
+    boolean sdDisponible, sdAccesoEscritura;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +71,7 @@ public class MainActivity extends ListActivity {
         bd = new BDContactos(this);
         actualizaLista();
 
+
         a = new Adaptador(this,arrayList);
         a.notifyDataSetChanged();
         setListAdapter(a);
@@ -79,20 +91,18 @@ public class MainActivity extends ListActivity {
                 startActivity(it);
             }
         });
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch(id){
@@ -108,9 +118,6 @@ public class MainActivity extends ListActivity {
         super.onRestart();
         Toast.makeText(this, "Lista recargada", Toast.LENGTH_SHORT).show();
         actualizaLista();
-
-        for(int i=0; i<bd.returnId()-1; i++)
-            System.out.println("Id: "+bd.listado().get(i).getId());
 
         a = null;
         a = new Adaptador(this,arrayList);
@@ -136,5 +143,39 @@ public class MainActivity extends ListActivity {
             }
         else
             Toast.makeText(getApplicationContext(), "La lista está vacia", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public String guardaFoto(Elemento el, Bitmap bitmapImage){
+        if (sdDisponible && sdAccesoEscritura) {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            String nombreF = el.getNombre()+ el.getId()+bd.countFotosContacto((int)el.getId());
+            File f = new File(directory, nombreF);
+
+            FileOutputStream fos = null;
+            try {
+
+                fos = new FileOutputStream(f);
+                bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return f.getAbsolutePath();
+        }
+
+        return null;
+    }
+
+    public static Bitmap cargaFoto(String path){
+
+        try {
+            File f=new File(path);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            return b;
+        } catch (FileNotFoundException e){e.printStackTrace();}
+
+        return null;
     }
 }

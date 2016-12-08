@@ -5,10 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by Deivi on 02/12/2016.
@@ -16,7 +20,7 @@ import java.util.List;
 
 public class BDContactos extends SQLiteOpenHelper implements Serializable{
 
-    private int tamanioTablac;
+    private int tamanioTablac, tamanioTablaf;
     private static Elemento elemento;
     private static final int VERSION_BASEDATOS = 1;
     private static final String NOMBRE_BASEDATOS = "BDContactos.bd";
@@ -73,6 +77,99 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         }
         db.close();
         return count+1;
+    }
+
+    public long returnIdTelefono(){
+        long count=0;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+NOMBRE_TABLAT, null);
+            c.moveToFirst();
+            count=Long.parseLong(c.getString(0));
+        }
+        db.close();
+        return count+1;
+    }
+
+    public long countTelefonosContacto(int idContacto){
+        long count=0;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+NOMBRE_TABLAT+" WHERE contactos_idContacto="+idContacto, null);
+            c.moveToFirst();
+            count=Long.parseLong(c.getString(0));
+        }
+        db.close();
+        return count;
+    }
+
+    public boolean guardaTelefono(String telefono, int idContacto){
+
+        long idTelefono = returnIdTelefono();
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            db.execSQL("INSERT INTO "+NOMBRE_TABLAT+" VALUES ("+idTelefono+", '"+telefono+"', "+idContacto+")");
+            return true;
+        }
+        db.close();
+        return false;
+    }
+
+    public long borrarYordenarTelefono(int index){
+        tamanioTablaf=(int)returnIdTelefono()-1;
+
+        long nreg_afectados = -1;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            nreg_afectados = db.delete(NOMBRE_TABLAT, "idTelefonos=" + index, null);
+            for(int i=index; i<tamanioTablaf; i++) {
+                db.execSQL("UPDATE " + NOMBRE_TABLAT + " SET idTelefonos=" + i + " WHERE idTelefonos=" + (i + 1));
+            }
+        }
+
+        if(nreg_afectados>0)
+            tamanioTablaf=-(int)nreg_afectados;
+        db.close();
+        return nreg_afectados;
+    }
+
+    public List<Telefonos> returnTelefonos(int idContacto){
+        List<Telefonos> telefonos = new ArrayList<Telefonos>();
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT idTelefonos, telefono FROM "+NOMBRE_TABLAT+" WHERE contactos_idContacto="+idContacto+" ORDER BY idTelefonos ASC", null);
+            c.moveToFirst();
+            telefonos.add(new Telefonos(c.getInt(0), c.getString(1), idContacto));
+            while(c.moveToNext()){
+                telefonos.add(new Telefonos(c.getInt(0), c.getString(1), idContacto));
+            }
+        }
+        db.close();
+        return telefonos;
+    }
+
+    public long returnIdFoto(){
+        long count=0;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+NOMBRE_TABLAF, null);
+            c.moveToFirst();
+            count=Long.parseLong(c.getString(0));
+        }
+        db.close();
+        return count+1;
+    }
+
+    public long countFotosContacto(int idContacto){
+        long count=0;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+NOMBRE_TABLAF+" WHERE contactos_idContacto="+idContacto, null);
+            c.moveToFirst();
+            count=Long.parseLong(c.getString(0));
+        }
+        db.close();
+        return count;
     }
 
     public long borrarContacto(int index){
@@ -165,7 +262,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         }
         return false;
     }
-
+/*
     public long insertarTelefono(Elemento e) {
         long nreg_afectados = -1;
         SQLiteDatabase db = getWritableDatabase();
@@ -198,7 +295,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         }
         db.close();
         return nreg_afectados;
-    }
+    }*/
 
     public List<Elemento> listado() {
         SQLiteDatabase db = getReadableDatabase();

@@ -2,12 +2,16 @@ package com.example.deivi.agenda_contactos;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  * Created by Deivi on 01/12/2016.
@@ -26,7 +33,7 @@ public class EditaContacto extends AppCompatActivity {
 
     EditText etNombre, etTelefono, etDireccion, etEmail, etPagina;
     Button btTelefono, btFoto, btBaja, btModificar, btAcciones;
-    ImageView imagen;
+    ImageView imagenV;
     BDContactos bd;
     Elemento el;
 
@@ -42,6 +49,12 @@ public class EditaContacto extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.etEmailE);
         etPagina = (EditText) findViewById(R.id.etPaginaE);
         btTelefono = (Button) findViewById(R.id.btAddTelefonoE);
+        btTelefono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gestionTelefonos();
+            }
+        });
         btFoto = (Button) findViewById(R.id.btAddFotoE);
         btBaja = (Button) findViewById(R.id.btBaja);
         btBaja.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +77,15 @@ public class EditaContacto extends AppCompatActivity {
                 accionesContacto();
             }
         });
-        imagen = (ImageView) findViewById(R.id.imagenEdita);
+        imagenV = (ImageView) findViewById(R.id.imagenEdita);
 
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             Elemento contacto = (Elemento) extra.get("contacto");
             cargaDatos(contacto);
         }
+
+        //comprobarSD();
     }
 
     /*
@@ -211,9 +226,76 @@ public class EditaContacto extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //imagen = (ImageView) findViewById(R.id.imagenEdita);
         if (requestCode == CAMARA && resultCode == RESULT_OK && data != null) {
-            //Bitmap imagen = (Bitmap) data.getExtras().get("data");
-            //v.setBackgroundResource(imagen); guardar la imagen recibida de camara en la tabla fotos de ese contacto
+            Bitmap imagen = (Bitmap) data.getExtras().get("data");
+            String ruta = guardaFoto(el, imagen);
+            imagenV.setImageBitmap(cargaFoto(ruta));
+            //guardaFoto(el, imagen);
         }
+    }
+
+    /*boolean sdDisponible, sdAccesoEscritura;
+    public void comprobarSD(){
+        sdDisponible = false;
+        sdAccesoEscritura = false;
+
+        String estado = Environment.getExternalStorageState();
+        if (estado.equals(Environment.MEDIA_MOUNTED)){
+            sdDisponible = true;
+            sdAccesoEscritura = true;
+        } else
+        if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)){
+            sdDisponible = true;
+            sdAccesoEscritura = false;
+        } else {
+            sdDisponible = false;
+            sdAccesoEscritura = false;
+        }
+    }*/
+
+    public boolean guardaTelefono(String telefono){
+        return bd.guardaTelefono(telefono, (int)el.getId());
+    }
+
+    public void gestionTelefonos(){
+        Intent i = new Intent(getApplicationContext(), AddTelefono.class);
+        i.putExtra("idContacto", el.getId());
+        startActivity(i);
+    }
+
+    public String guardaFoto(Elemento el, Bitmap bitmapImage){
+        //if (sdDisponible && sdAccesoEscritura) {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+            String nombreF = el.getNombre()+ el.getId()+bd.countFotosContacto((int)el.getId());
+            File f = new File(directory, nombreF);
+
+            FileOutputStream fos = null;
+            try {
+
+                fos = new FileOutputStream(f);
+                bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String string = "Directory: "+directory+" file: "+nombreF+" f.absolutePath:"+f.getAbsolutePath();
+            Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
+            System.out.println(string);
+            return f.getAbsolutePath();
+        //}
+
+    }
+
+    public static Bitmap cargaFoto(String path){
+
+        try {
+            File f=new File(path);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            return b;
+        } catch (FileNotFoundException e){e.printStackTrace();}
+
+        return null;
     }
 }

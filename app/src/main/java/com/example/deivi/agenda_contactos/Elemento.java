@@ -43,15 +43,4 @@ public class Elemento implements Serializable {
     public void setDireccion(String direccion){this.direccion=direccion;}
     public void setEmail(String email){this.email=email;}
     public void setPagina(String pagina){this.pagina=pagina;}
-
-    public int getGeneraIdTelefono(){
-        int id=1;
-
-        return id;
-    }
-
-    public int getGeneraIdFoto(){
-        int id=1;
-
-        return id;
-    }}
+}
