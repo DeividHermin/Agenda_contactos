@@ -15,15 +15,13 @@ import java.util.ArrayList;
 /**
  * Created by Deivi on 30/11/2016.
  */
-public class Adaptador extends BaseAdapter {
-    private ArrayList<Elemento> lista;
+public class AdaptadorFoto extends BaseAdapter {
+    private ArrayList<Fotos> lista;
     private final Activity actividad;
-    BDContactos bd;
-    public Adaptador(Activity a, ArrayList<Elemento> v, BDContactos bd){
+    public AdaptadorFoto(Activity a, ArrayList<Fotos> v){
         super();
         this.lista = v;
         this.actividad = a;
-        this.bd=bd;
     }
 // En el constructor de la clase se indica la actividad donde se ejecutará
 // y la lista de datos a visualizar.
@@ -37,34 +35,24 @@ public class Adaptador extends BaseAdapter {
     }
     @Override
     public long getItemId(int arg0) {
-        return lista.get(arg0).getId();
+        return lista.get(arg0).getIdFoto();
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater ly = actividad.getLayoutInflater();
-        View view = ly.inflate(R.layout.item, null, true);
+        View view = ly.inflate(R.layout.itemfoto, null, true);
 
-        TextView tvNombre= (TextView) view.findViewById(R.id.tvNombre);
-        tvNombre.setText((CharSequence) lista.get(position).getNombre());
+        TextView tvTelefono= (TextView) view.findViewById(R.id.etNombreFoto);
+        tvTelefono.setText(""+ lista.get(position).getObservFoto());
 
-        TextView tvTelefono= (TextView) view.findViewById(R.id.tvTelefono);
-        tvTelefono.setText(""+ lista.get(position).getTelefono(bd));
 
-        TextView tvDireccion= (TextView) view.findViewById(R.id.tvDireccion);
-        tvDireccion.setText(""+ lista.get(position).getDireccion());
-
-        TextView tvEmail= (TextView) view.findViewById(R.id.tvEmail);
-        tvEmail.setText(""+ lista.get(position).getEmail());
-
-        TextView tvPagina= (TextView) view.findViewById(R.id.tvPagina);
-        tvPagina.setText(""+ lista.get(position).getPagina());
-
-        File imgFile = new File(lista.get(position).getFoto(bd));
+        File imgFile = new File(lista.get(position).getRutaFichero());
         if(imgFile.exists()){
-            ImageView imagenFoto = (ImageView)view.findViewById(R.id.imagen);
+            ImageView imagenFoto = (ImageView)view.findViewById(R.id.ivItemFoto);
             imagenFoto.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
             imagenFoto.setAdjustViewBounds(true);
         }
+
         return view;
     }
 }

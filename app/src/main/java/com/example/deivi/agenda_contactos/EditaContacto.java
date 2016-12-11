@@ -35,6 +35,7 @@ public class EditaContacto extends AppCompatActivity {
     Button btTelefono, btFoto, btBaja, btModificar, btAcciones;
     ImageView imagenV;
     BDContactos bd;
+    long idContacto;
     Elemento el;
 
     @Override
@@ -56,6 +57,12 @@ public class EditaContacto extends AppCompatActivity {
             }
         });
         btFoto = (Button) findViewById(R.id.btAddFotoE);
+        btFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gestionFotos();
+            }
+        });
         btBaja = (Button) findViewById(R.id.btBaja);
         btBaja.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +89,20 @@ public class EditaContacto extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
             Elemento contacto = (Elemento) extra.get("contacto");
-            cargaDatos(contacto);
+            el = contacto;
+            idContacto = el.getId();
+            cargaDatos();
         }
 
         //comprobarSD();
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        el = bd.getContacto((int)idContacto);
+        cargaDatos();
+        Toast.makeText(getApplicationContext(), "onRestart", Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -116,14 +133,14 @@ public class EditaContacto extends AppCompatActivity {
             Toast.makeText(this, "No se ha modificado el contacto", Toast.LENGTH_SHORT).show();
     }
 
-    public void cargaDatos(Elemento contacto) {
-        el = contacto;
-        etNombre.setText(contacto.getNombre());
-        etTelefono.setText(contacto.getTelefono());
-        etDireccion.setText(contacto.getDireccion());
-        etEmail.setText(contacto.getEmail());
-        etPagina.setText(contacto.getPagina());
+    public void cargaDatos() {
 
+        etNombre.setText(el.getNombre());
+        etTelefono.setText(el.getTelefono(bd));
+        etDireccion.setText(el.getDireccion());
+        etEmail.setText(el.getEmail());
+        etPagina.setText(el.getPagina());
+        imagenV.setImageBitmap(cargaFoto(el.getFoto(bd)));
         /*File imgFile = new File(contacto.getFoto());
         if(imgFile.exists()){
             imagen.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
@@ -171,7 +188,7 @@ public class EditaContacto extends AppCompatActivity {
                         paginaWeb();
                         break;
                     case 3:
-                        foto();
+                        gestionFotos();
                         break;
                 }
             }
@@ -181,8 +198,7 @@ public class EditaContacto extends AppCompatActivity {
     }
 
     public void llamadaCall() {
-        String telefono = el.getTelefono();
-        telefono = "tel:685192426";
+        String telefono = "tel:"+el.getTelefono(bd);
         if(telefono.equals("")){
             Toast.makeText(getApplicationContext(), "No se ha encontrado un telefono", Toast.LENGTH_SHORT).show();
         }else{
@@ -217,14 +233,14 @@ public class EditaContacto extends AppCompatActivity {
             startActivity(i);
         }
     }
-
+/*
     private static final int CAMARA = 1;
     public void foto() {
         Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivityForResult(i, CAMARA);
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //imagen = (ImageView) findViewById(R.id.imagenEdita);
         if (requestCode == CAMARA && resultCode == RESULT_OK && data != null) {
@@ -233,30 +249,11 @@ public class EditaContacto extends AppCompatActivity {
             imagenV.setImageBitmap(cargaFoto(ruta));
             //guardaFoto(el, imagen);
         }
-    }
-
-    /*boolean sdDisponible, sdAccesoEscritura;
-    public void comprobarSD(){
-        sdDisponible = false;
-        sdAccesoEscritura = false;
-
-        String estado = Environment.getExternalStorageState();
-        if (estado.equals(Environment.MEDIA_MOUNTED)){
-            sdDisponible = true;
-            sdAccesoEscritura = true;
-        } else
-        if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)){
-            sdDisponible = true;
-            sdAccesoEscritura = false;
-        } else {
-            sdDisponible = false;
-            sdAccesoEscritura = false;
-        }
     }*/
 
-    public boolean guardaTelefono(String telefono){
+    /*public boolean guardaTelefono(String telefono){
         return bd.guardaTelefono(telefono, (int)el.getId());
-    }
+    }*/
 
     public void gestionTelefonos(){
         Intent i = new Intent(getApplicationContext(), AddTelefono.class);
@@ -264,7 +261,13 @@ public class EditaContacto extends AppCompatActivity {
         startActivity(i);
     }
 
-    public String guardaFoto(Elemento el, Bitmap bitmapImage){
+    public void gestionFotos(){
+        Intent i = new Intent(getApplicationContext(), AddFoto.class);
+        i.putExtra("idContacto", el.getId());
+        startActivity(i);
+    }
+
+    /*public String guardaFoto(Elemento el, Bitmap bitmapImage){
         //if (sdDisponible && sdAccesoEscritura) {
             ContextWrapper cw = new ContextWrapper(getApplicationContext());
             File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -286,10 +289,9 @@ public class EditaContacto extends AppCompatActivity {
             return f.getAbsolutePath();
         //}
 
-    }
+    }*/
 
     public static Bitmap cargaFoto(String path){
-
         try {
             File f=new File(path);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));

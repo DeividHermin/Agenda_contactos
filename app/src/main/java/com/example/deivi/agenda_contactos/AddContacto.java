@@ -1,5 +1,6 @@
 package com.example.deivi.agenda_contactos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +19,8 @@ public class AddContacto extends AppCompatActivity {
     Button btTelefono, btFoto, btAlta;
     ImageView imagen;
     BDContactos bd;
+    //boolean creado;
+    //int idContacto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,12 @@ public class AddContacto extends AppCompatActivity {
         etEmail = (EditText)findViewById(R.id.etEmailA);
         etPagina = (EditText)findViewById(R.id.etPaginaA);
         btTelefono = (Button)findViewById(R.id.btAddTelefonoA);
+        btTelefono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                diaAddTelefono();
+            }
+        });
         btFoto = (Button)findViewById(R.id.btAddFotoA);
         btAlta = (Button)findViewById(R.id.btAlta);
         btAlta.setOnClickListener(new View.OnClickListener() {
@@ -40,9 +49,39 @@ public class AddContacto extends AppCompatActivity {
             }
         });
         imagen = (ImageView)findViewById(R.id.imagenAdd);
-
+        //idContacto=(int)bd.returnId();
+        /*if(!creado) {
+            bd.insertarContacto(new Elemento(idContacto, "", "", "", "", "", ""));
+            creado=true;
+            Toast.makeText(getApplicationContext(), "insertado", Toast.LENGTH_SHORT).show();
+        }*/
 
     }
+
+    @Override
+    public void onBackPressed(){
+        bd.borrarTelContacto((int)(bd.returnId()));
+        System.out.println("BORRANDO TELEFONOS DEL CONTACTO "+(bd.returnId()));
+        super.onBackPressed();
+    }
+/*
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("orientacion", creado);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        creado = savedInstanceState.getBoolean("orientacion");
+    }*/
 
     public void alta(){
         String nombre =     etNombre.getText().toString();
@@ -51,6 +90,7 @@ public class AddContacto extends AppCompatActivity {
         String email =      etEmail.getText().toString();
         String pagina =     etPagina.getText().toString();
 
+        //bd.modificarContacto(new Elemento(idContacto, nombre, telefono, "", direccion, email, pagina));
         bd.insertarContacto(new Elemento(bd.returnId(), nombre, telefono, "", direccion, email, pagina));
         Toast.makeText(getApplicationContext(), "Contacto añadido", Toast.LENGTH_SHORT).show();
 
@@ -59,11 +99,13 @@ public class AddContacto extends AppCompatActivity {
         etDireccion.setText("");
         etEmail.setText("");
         etPagina.setText("");
+
+        finish();
     }
 
-    public long generaId(){
-        long id=1;
-
-        return id;
+    public void diaAddTelefono(){
+        Intent i = new Intent(getApplicationContext(), AddTelefono.class);
+        i.putExtra("idContacto", bd.returnId());
+        startActivity(i);
     }
 }

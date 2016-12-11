@@ -29,10 +29,13 @@ public class Elemento implements Serializable {
         this.pagina=pagina;
         this.email=email;
     }
+
     public String getNombre(){return nombre;}
     public long getId(){return id;}
-    public String getTelefono(){return telefono; }
-    public String getFoto(){return rFoto;}
+    public String getTelefono(BDContactos bd){
+        return bd.primerTelefono((int)id);
+    }
+    public String getFoto(BDContactos bd){return bd.primeraFoto((int)id);}
     public String getDireccion(){return direccion; }
     public String getEmail(){return email; }
     public String getPagina(){return pagina; }

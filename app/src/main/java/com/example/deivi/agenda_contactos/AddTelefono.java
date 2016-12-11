@@ -30,8 +30,9 @@ public class AddTelefono extends AppCompatActivity {
     static ArrayList<Telefonos> arrayListTel = new ArrayList();
     BDContactos bd;
     int idContacto;
+    //Elemento contacto;
 
-    Button btAdd, btRemove;
+    Button btAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,7 @@ public class AddTelefono extends AppCompatActivity {
             for (int i = 0; i < bd.countTelefonosContacto(idContacto); i++) {
                 List<Telefonos> lista = bd.returnTelefonos(idContacto);
                 arrayListTel.add(lista.get(i));
-                System.out.println("ID: "+lista.get(i).getIdTelefonos());
+                System.out.println("actualizaLista ID: "+lista.get(i).getIdTelefonos());
             }
         else
             System.out.println("No hay telefonos");
@@ -122,6 +123,7 @@ public class AddTelefono extends AppCompatActivity {
         alert.setNeutralButton("Borrar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 borrarTelefono(tel.getIdTelefonos());
+                //actualizaTelContacto();
                 onRestart();
                 Toast.makeText(getApplicationContext(), "Borrado", Toast.LENGTH_SHORT).show();
             }
@@ -139,13 +141,13 @@ public class AddTelefono extends AppCompatActivity {
         final EditText edittext = new EditText(getApplicationContext());
         alert.setMessage("");
         alert.setTitle("Nuevo telefono");
-
         alert.setView(edittext);
 
         alert.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String telefono = edittext.getText().toString();
                 añadirTelefono(telefono);
+                //actualizaTelContacto();
                 onRestart();
                 //Toast.makeText(getApplicationContext(), "TELEFONO: "+telefono, Toast.LENGTH_SHORT).show();
             }
@@ -158,4 +160,8 @@ public class AddTelefono extends AppCompatActivity {
 
         alert.show();
     }
+    /*
+    public void actualizaTelContacto(){
+        contacto.setTelefono(bd.primerTelefono((int)contacto.getId()));
+    }*/
 }

@@ -72,7 +72,7 @@ public class MainActivity extends ListActivity {
         actualizaLista();
 
 
-        a = new Adaptador(this,arrayList);
+        a = new Adaptador(this,arrayList, bd);
         a.notifyDataSetChanged();
         setListAdapter(a);
 
@@ -116,11 +116,11 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onRestart () {
         super.onRestart();
-        Toast.makeText(this, "Lista recargada", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Lista recargada", Toast.LENGTH_SHORT).show();
         actualizaLista();
 
         a = null;
-        a = new Adaptador(this,arrayList);
+        a = new Adaptador(this, arrayList, bd);
         a.notifyDataSetChanged();
         setListAdapter(a);
     }
@@ -169,7 +169,6 @@ public class MainActivity extends ListActivity {
     }
 
     public static Bitmap cargaFoto(String path){
-
         try {
             File f=new File(path);
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -179,3 +178,9 @@ public class MainActivity extends ListActivity {
         return null;
     }
 }
+
+//cambiar que el edittext del dialog de añadir telefono sea numerico
+//arreglar layouts
+//girar la pantalla tras sacar una foto en el addFotos cierra el dialogo y no se puede añadir
+//añadir los 3 ejercicios
+//terminar las preferencias
