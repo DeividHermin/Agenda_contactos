@@ -6,6 +6,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -177,10 +178,23 @@ public class MainActivity extends ListActivity {
 
         return null;
     }
+    /*
+    public void llamadaCall(View v) {
+        String telefono = "tel:";//+el.getTelefono(bd);
+        if(telefono.equals("")){
+            Toast.makeText(getApplicationContext(), "No se ha encontrado un telefono", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent i = new Intent(Intent.ACTION_DIAL);
+            i.setData(Uri.parse(telefono));
+            startActivity(i);
+        }
+    }*/
 }
 
 //cambiar que el edittext del dialog de añadir telefono sea numerico
 //arreglar layouts
+//no guarda las tomadas de la galeria
 //girar la pantalla tras sacar una foto en el addFotos cierra el dialogo y no se puede añadir
 //añadir los 3 ejercicios
 //terminar las preferencias
+//arreglar getNombreFoto de Fotos o de Elementos

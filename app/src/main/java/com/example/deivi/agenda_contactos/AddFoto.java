@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -162,7 +165,12 @@ public class AddFoto extends AppCompatActivity {
     public void obtenerFoto() {
         //mirar las preferencias para abrir galeria o camara
         Intent i;
-        if(true) {
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean opcion = sp.getBoolean("cbCamara", true);
+        Toast.makeText(getApplicationContext(), ""+opcion, Toast.LENGTH_SHORT).show();
+
+        if(opcion) {
             i = new Intent("android.media.action.IMAGE_CAPTURE");
             startActivityForResult(i, 1);
         }else {
@@ -177,10 +185,12 @@ public class AddFoto extends AppCompatActivity {
         //imagen = (ImageView) findViewById(R.id.imagenEdita);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             imagen = (Bitmap) data.getExtras().get("data");
-
-            //imagenV.setImageBitmap(cargaFoto(ruta));
-            //guardaFoto(el, imagen);
         }
+
+        if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
+            imagen = (Bitmap) data.getExtras().get("data");
+        }
+
         if(resultCode==RESULT_OK)
             continuar=true;
         else

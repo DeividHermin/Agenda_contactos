@@ -102,7 +102,7 @@ public class EditaContacto extends AppCompatActivity {
         super.onRestart();
         el = bd.getContacto((int)idContacto);
         cargaDatos();
-        Toast.makeText(getApplicationContext(), "onRestart", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "onRestart", Toast.LENGTH_SHORT).show();
     }
 
     /*

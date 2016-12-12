@@ -3,15 +3,16 @@
 
     <PreferenceCategory
         android:key="DG"
-        android:title="Preferencias">
+        android:title="Obtener imagenes de:">
 
-        <ListPreference
-            android:key="Imagen"
-            android:title="Imagenes de perfil"
-            android:summary="Como elegir las fotos de los contactos"
-            android:defaultValue="1"
-            android:entries     ="@array/tipos_dispositivos"
-            android:entryValues ="@array/tipos_dispositivos"/>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:title="Camara"
+            android:key="cbCamara" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="Galeria"
+            android:key="cbGaleria" />
 
     </PreferenceCategory>
 </PreferenceScreen>
