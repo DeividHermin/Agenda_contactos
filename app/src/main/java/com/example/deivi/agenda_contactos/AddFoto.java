@@ -148,7 +148,13 @@ public class AddFoto extends AppCompatActivity {
         alert.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String observacion= edittext.getText().toString();
-                guardaFotoMovil(bd.getContacto(idContacto).getNombre(), observacion, imagen);
+                String nombre;
+
+                if(bd.existeContacto(idContacto))
+                    nombre=bd.getContacto(idContacto).getNombre();
+                else
+                    nombre="newC";
+                guardaFotoMovil(nombre, observacion, imagen);
                 onRestart();
                 //Toast.makeText(getApplicationContext(), "Foto: "+foto, Toast.LENGTH_SHORT).show();
             }

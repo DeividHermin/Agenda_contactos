@@ -306,6 +306,18 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         return count+1;
     }
 
+    public boolean existeContacto(int index){
+        boolean existe=false;
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT * FROM "+NOMBRE_TABLAC+" WHERE idContacto="+index, null);
+            if(c.moveToNext())
+                existe=true;
+        }
+        db.close();
+
+        return existe;
+    }
     public long borrarContacto(int index){
         tamanioTablac=(int)returnId()-1;
         long nreg_afectados = -1;
@@ -313,6 +325,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         if (db != null) {
             nreg_afectados = db.delete(NOMBRE_TABLAC, "idContacto=" + index, null);
             borrarTelContacto(index);
+            borrarFotosContacto(index);
             //db.delete(NOMBRE_TABLAT, "contactos_idContacto=" + index, null);
             //db.delete(NOMBRE_TABLAF, "contactos_idContacto=" + index, null);
         }

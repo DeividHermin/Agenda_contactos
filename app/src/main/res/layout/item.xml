@@ -6,23 +6,18 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:weightSum="1">
 
-    <RelativeLayout
-        android:layout_width="84dp"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/imagen"
-            android:layout_weight="0.43"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imagen"
+        android:layout_weight="0.20"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -97,13 +92,13 @@
             android:focusableInTouchMode="false" />
 
         <Button
-            android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="37dp"
-            android:id="@+id/button"
+            android:id="@+id/btItemCamera"
             android:layout_weight="1"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"
+            android:background="@android:drawable/ic_menu_camera" />
 
     </LinearLayout>
 

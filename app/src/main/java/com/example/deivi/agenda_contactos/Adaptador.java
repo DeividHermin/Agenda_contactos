@@ -96,6 +96,16 @@ public class Adaptador extends BaseAdapter {
                 actividad.startActivity(i);
             }
         });
+
+        Button btCamara = (Button) view.findViewById(R.id.btItemCamera);
+        btCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(actividad, AddFoto.class);
+                i.putExtra("idContacto", lista.get(position).getId());
+                actividad.startActivity(i);
+            }
+        });
         return view;
     }
 }

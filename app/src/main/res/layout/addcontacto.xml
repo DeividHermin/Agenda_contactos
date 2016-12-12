@@ -4,109 +4,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbNombre"
-        android:textSize="18sp"
-        android:layout_below="@+id/imagenAdd"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etNombreA"
-        android:layout_below="@+id/lbNombre"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Telefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbTelefono"
-        android:textSize="18sp"
-        android:layout_below="@+id/etNombreA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/etTelefonoA"
-        android:layout_below="@+id/lbTelefono"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btAddFotoA"
-        android:layout_toStartOf="@+id/btAddFotoA" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etDireccionA"
-        android:layout_below="@+id/lbDireccion"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbEmail"
-        android:textSize="18sp"
-        android:layout_below="@+id/etDireccionA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Pagina web"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbPagina"
-        android:textSize="18sp"
-        android:layout_below="@+id/etEmailA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etPaginaA"
-        android:layout_below="@+id/lbPagina"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Foto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbFoto"
-        android:textSize="18sp"
-        android:layout_below="@+id/etPaginaA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etFotoA"
-        android:layout_below="@+id/lbFoto"
-        android:layout_toLeftOf="@+id/btAddFotoA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,78 +13,254 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imagenAdd">
 
-        <Button
-            android:text="Alta"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/btAlta"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/trash1"
-            android:layout_weight="1" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/trash2"
-            android:layout_weight="1" />
+                <TextView
+                    android:text="Nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbNombre"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/imagenAdd"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/trash3"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/etNombreA"
+                    android:layout_below="@+id/lbNombre"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
 
-    <TextView
-        android:text="Direccion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lbDireccion"
-        android:textSize="18sp"
-        android:layout_below="@+id/etTelefonoA"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btAddFotoA"
-        android:background="@android:drawable/ic_input_add"
-        android:layout_alignBottom="@+id/etFotoA"
-        android:layout_alignLeft="@+id/btAddTelefonoA"
-        android:layout_alignStart="@+id/btAddTelefonoA" />
+                <TextView
+                    android:text="Telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbTelefono"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/etNombreA"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/etEmailA"
-        android:layout_below="@+id/lbEmail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btAddTelefonoA"
-        android:background="@android:drawable/ic_input_add"
-        android:layout_above="@+id/lbDireccion"
-        android:layout_toRightOf="@+id/imagenAdd"
-        android:layout_toEndOf="@+id/imagenAdd"
-        android:layout_marginLeft="272dp"
-        android:layout_marginStart="272dp" />
+                    <EditText
+                        android:layout_width="320dp"
+                        android:layout_height="match_parent"
+                        android:inputType="phone"
+                        android:ems="10"
+                        android:id="@+id/etTelefonoA"
+                        android:layout_below="@+id/lbTelefono"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/btAddFotoA"
+                        android:layout_toStartOf="@+id/btAddFotoA"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_width="51dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/btAddTelefonoA"
+                        android:background="@android:drawable/ic_input_add"
+                        android:layout_above="@+id/lbDireccion"
+                        android:layout_toRightOf="@+id/imagenAdd"
+                        android:layout_toEndOf="@+id/imagenAdd" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="Direccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbDireccion"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/etTelefonoA"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/etDireccionA"
+                    android:layout_below="@+id/lbDireccion"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbEmail"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/etDireccionA"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:id="@+id/etEmailA"
+                    android:layout_below="@+id/lbEmail"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="Pagina web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbPagina"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/etEmailA"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/etPaginaA"
+                    android:layout_below="@+id/lbPagina"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="Foto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lbFoto"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/etPaginaA"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:layout_width="319dp"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/etFotoA"
+                        android:layout_below="@+id/lbFoto"
+                        android:layout_toLeftOf="@+id/btAddFotoA"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:layout_height="match_parent"
+                        android:id="@+id/btAddFotoA"
+                        android:background="@android:drawable/ic_input_add"
+                        android:layout_alignBottom="@+id/etFotoA"
+                        android:layout_alignLeft="@+id/btAddTelefonoA"
+                        android:layout_alignStart="@+id/btAddTelefonoA"
+                        android:layout_weight="0.40"
+                        android:layout_width="51dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1">
+
+                <Button
+                    android:text="Alta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btAlta"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/trash1"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/trash2"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/trash3"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

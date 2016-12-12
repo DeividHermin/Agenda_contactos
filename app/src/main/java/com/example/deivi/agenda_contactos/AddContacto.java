@@ -41,6 +41,12 @@ public class AddContacto extends AppCompatActivity {
             }
         });
         btFoto = (Button)findViewById(R.id.btAddFotoA);
+        btFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gestionFotos();
+            }
+        });
         btAlta = (Button)findViewById(R.id.btAlta);
         btAlta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,27 +67,10 @@ public class AddContacto extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         bd.borrarTelContacto((int)(bd.returnId()));
+        bd.borrarFotosContacto((int)bd.returnId());
         System.out.println("BORRANDO TELEFONOS DEL CONTACTO "+(bd.returnId()));
         super.onBackPressed();
     }
-/*
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState){
-        super.onSaveInstanceState(outState);
-        outState.putBoolean("orientacion", creado);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
-        super.onRestoreInstanceState(savedInstanceState);
-        creado = savedInstanceState.getBoolean("orientacion");
-    }*/
 
     public void alta(){
         String nombre =     etNombre.getText().toString();
@@ -105,6 +94,12 @@ public class AddContacto extends AppCompatActivity {
 
     public void diaAddTelefono(){
         Intent i = new Intent(getApplicationContext(), AddTelefono.class);
+        i.putExtra("idContacto", bd.returnId());
+        startActivity(i);
+    }
+
+    public void gestionFotos(){
+        Intent i = new Intent(getApplicationContext(), AddFoto.class);
         i.putExtra("idContacto", bd.returnId());
         startActivity(i);
     }
