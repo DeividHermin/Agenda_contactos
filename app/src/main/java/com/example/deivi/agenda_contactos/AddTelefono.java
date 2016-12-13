@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -136,6 +137,9 @@ public class AddTelefono extends AppCompatActivity {
     public void diaAñadir () {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(getApplicationContext());
+        edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
+        edittext.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
         alert.setMessage("");
         alert.setTitle(R.string.btNuevoTelefono);
         alert.setView(edittext);

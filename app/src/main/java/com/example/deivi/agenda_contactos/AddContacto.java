@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class AddContacto extends AppCompatActivity {
 
-    EditText etNombre, etTelefono, etDireccion, etEmail, etPagina;
+    EditText etNombre, etTelefono, etDireccion, etEmail, etPagina, etFoto;
     Button btTelefono, btFoto, btAlta;
     ImageView imagen;
     BDContactos bd;
@@ -31,6 +31,7 @@ public class AddContacto extends AppCompatActivity {
         etDireccion = (EditText)findViewById(R.id.etDireccionA);
         etEmail = (EditText)findViewById(R.id.etEmailA);
         etPagina = (EditText)findViewById(R.id.etPaginaA);
+        etFoto = (EditText)findViewById(R.id.etFotoA);
         btTelefono = (Button)findViewById(R.id.btAddTelefonoA);
         btTelefono.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,14 @@ public class AddContacto extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        etTelefono.setText(bd.primerTelefono((int)bd.returnId()));
+        etFoto.setText(bd.comentarioPrimeraFoto((int)bd.returnId()));
+
+    }
+
     public void alta(){
         String nombre =     etNombre.getText().toString();
         String telefono =   etTelefono.getText().toString();
@@ -70,16 +79,30 @@ public class AddContacto extends AppCompatActivity {
         String email =      etEmail.getText().toString();
         String pagina =     etPagina.getText().toString();
 
-        bd.insertarContacto(new Elemento(bd.returnId(), nombre, telefono, "", direccion, email, pagina));
-        Toast.makeText(getApplicationContext(), R.string.contactoAdd, Toast.LENGTH_SHORT).show();
+        boolean error1=true, error2=true;
+        if(bd.primerTelefono((int)bd.returnId()).equals(""))
+            error1=false;
+        if(bd.primeraFoto((int)bd.returnId()).equals(""))
+            error2=false;
 
-        etNombre.setText("");
-        etTelefono.setText("");
-        etDireccion.setText("");
-        etEmail.setText("");
-        etPagina.setText("");
+        if(error1 && error2){
+            bd.insertarContacto(new Elemento(bd.returnId(), nombre, telefono, "", direccion, email, pagina));
+            Toast.makeText(getApplicationContext(), R.string.contactoAdd, Toast.LENGTH_SHORT).show();
 
-        finish();
+            etNombre.setText("");
+            etTelefono.setText("");
+            etDireccion.setText("");
+            etEmail.setText("");
+            etPagina.setText("");
+
+            finish();
+        }else{
+            if(!error1)
+                Toast.makeText(getApplicationContext(), R.string.faltaTelefono, Toast.LENGTH_SHORT).show();
+            if(!error2)
+                Toast.makeText(getApplicationContext(), R.string.faltaFoto, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void diaAddTelefono(){

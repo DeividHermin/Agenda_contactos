@@ -137,7 +137,8 @@ public class AddFoto extends AppCompatActivity {
         /*TextView tv = new TextView(getApplicationContext());
         tv.setText("Observacion");*/
         final EditText edittext = new EditText(getApplicationContext());
-        //alert.setView(tv);
+        edittext.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
         alert.setView(edittext);
 
         alert.setPositiveButton(R.string.btAñadir, new DialogInterface.OnClickListener() {
@@ -169,7 +170,7 @@ public class AddFoto extends AppCompatActivity {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean opcion = sp.getBoolean("cbCamara", true);
-        Toast.makeText(getApplicationContext(), ""+opcion, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), ""+opcion, Toast.LENGTH_SHORT).show();
 
         if(opcion) {
             i = new Intent("android.media.action.IMAGE_CAPTURE");

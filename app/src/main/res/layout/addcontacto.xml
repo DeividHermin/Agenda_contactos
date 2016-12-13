@@ -200,26 +200,25 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:layout_width="319dp"
+                        android:layout_width="320dp"
                         android:layout_height="match_parent"
-                        android:inputType="textPersonName"
+                        android:inputType="phone"
                         android:ems="10"
                         android:id="@+id/etFotoA"
-                        android:layout_below="@+id/lbFoto"
-                        android:layout_toLeftOf="@+id/btAddFotoA"
+                        android:layout_below="@+id/lbTelefono"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/btAddFotoA"
+                        android:layout_toStartOf="@+id/btAddFotoA"
                         android:layout_weight="1" />
 
                     <Button
+                        android:layout_width="51dp"
                         android:layout_height="match_parent"
                         android:id="@+id/btAddFotoA"
                         android:background="@android:drawable/ic_input_add"
-                        android:layout_alignBottom="@+id/etFotoA"
-                        android:layout_alignLeft="@+id/btAddTelefonoA"
-                        android:layout_alignStart="@+id/btAddTelefonoA"
-                        android:layout_weight="0.40"
-                        android:layout_width="51dp" />
+                        android:layout_toRightOf="@+id/imagenAdd"
+                        android:layout_toEndOf="@+id/imagenAdd" />
 
                 </LinearLayout>
 

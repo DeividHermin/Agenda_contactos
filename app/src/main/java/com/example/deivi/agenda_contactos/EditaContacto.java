@@ -1,6 +1,7 @@
 package com.example.deivi.agenda_contactos;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -107,11 +108,25 @@ public class EditaContacto extends AppCompatActivity {
     }
 
     public void modificarContacto() {
-        boolean modificado = bd.modificarContacto(new Elemento(el.getId(), etNombre.getText().toString(), etDireccion.getText().toString(), etPagina.getText().toString(), etEmail.getText().toString()));
-        if (modificado)
-            Toast.makeText(this, R.string.contactoModificado, Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+        boolean error1=true, error2=true;
+
+        if(bd.primerTelefono((int)idContacto).equals(""))
+            error1=false;
+        if(bd.primeraFoto((int)idContacto).equals(""))
+            error2=false;
+
+        if(error1 && error2){
+            boolean modificado = bd.modificarContacto(new Elemento(el.getId(), etNombre.getText().toString(), etDireccion.getText().toString(), etPagina.getText().toString(), etEmail.getText().toString()));
+            if (modificado)
+                Toast.makeText(this, R.string.contactoModificado, Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+        }else{
+            if(!error1)
+                Toast.makeText(getApplicationContext(), R.string.faltaTelefono, Toast.LENGTH_SHORT).show();
+            if(!error2)
+                Toast.makeText(getApplicationContext(), R.string.faltaFoto, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void cargaDatos() {
@@ -147,7 +162,7 @@ public class EditaContacto extends AppCompatActivity {
     public void accionesContacto() {
         AlertDialog.Builder alertDialogBu = new AlertDialog.Builder(this);
         alertDialogBu.setTitle(R.string.queDeseasHacer);
-        CharSequence opciones[] = {""+R.string.llamarPorTelefono, ""+R.string.mandarUnEmail, ""+R.string.visitarPagina, ""+R.string.tomarUnaFoto};
+        CharSequence opciones[] = {getResources().getString(R.string.llamarPorTelefono), getResources().getString(R.string.mandarUnEmail), getResources().getString(R.string.visitarPagina), getResources().getString(R.string.tomarUnaFoto)};
         alertDialogBu.setItems(opciones, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
@@ -203,7 +218,12 @@ public class EditaContacto extends AppCompatActivity {
         }else {
             Intent i = new Intent(Intent.ACTION_WEB_SEARCH);
             i.setData(Uri.parse(pagina));
-            startActivity(i);
+            try{
+                startActivity(i);
+            }catch(ActivityNotFoundException e){
+                Toast.makeText(getApplicationContext(), R.string.noHayPagina, Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

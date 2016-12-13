@@ -42,4 +42,6 @@
     <string name="asuntoDelCorreo">Asunto del correo</string>
     <string name="textoCorreo">Texto por Defecto del Correo</string>
     <string name="listaVacia">La lista esta vacia</string>
+    <string name="faltaTelefono">Añade un telefono</string>
+    <string name="faltaFoto">Añade una foto</string>
 </resources>

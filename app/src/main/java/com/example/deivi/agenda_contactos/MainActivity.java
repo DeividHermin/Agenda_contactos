@@ -22,7 +22,6 @@ public class MainActivity extends ListActivity {
     static Adaptador a;
     static ArrayList<Elemento> arrayList = new ArrayList();
     public static BDContactos bd;
-    boolean sdDisponible, sdAccesoEscritura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +62,6 @@ public class MainActivity extends ListActivity {
         a = new Adaptador(this,arrayList, bd);
         a.notifyDataSetChanged();
         setListAdapter(a);
-
-        for(int i=0; i<bd.returnId()-1; i++)
-            System.out.println("Id: "+bd.listado().get(i).getId());
 
         final ListView listview = (ListView) findViewById(android.R.id.list);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -135,14 +131,9 @@ public class MainActivity extends ListActivity {
 }
 
 /*
-cambiar que el edittext del dialog de añadir telefono sea numerico
-el texto de los edittext en los dialogos no se ve
 
 girar la pantalla tras sacar una foto en el addFotos cierra el dialogo y no se puede añadir
 borro fotos de la bd pero no de la carpeta donde las guardo /data/data/com.example.deivi.agenda_contactos/app_imageDir/yuyu10
-arreglar getNombreFoto de Fotos o de Elementos. arreglar añadir el comentario a editacontacto-foto
 
 añadir ejercicio NavigationDrawerConListView
-arreglar strings del dialogo acciones en editaContacto
-las fotos tomadas de la galeria generan un OutOfMemoryException
 */

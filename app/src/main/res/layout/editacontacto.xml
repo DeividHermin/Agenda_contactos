@@ -72,34 +72,35 @@
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     >
 
                     <EditText
-                        android:layout_width="332dp"
-                        android:layout_height="match_parent"
-                        android:inputType="phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/etTelefonoE"
                         android:layout_below="@+id/lbFoto"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
-                        android:layout_toLeftOf="@+id/btAddTelefonoE"
-                        android:layout_toStartOf="@+id/btAddTelefonoE"
+                        android:layout_toLeftOf="@+id/btAddFotoE"
+                        android:layout_toStartOf="@+id/btAddFotoE"
                         android:layout_weight="1"
                         android:editable="false"
                         android:focusable="false"
                         android:focusableInTouchMode="false" />
 
                     <Button
-                        android:layout_width="46dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/btAddTelefonoE"
                         android:background="@android:drawable/ic_input_add"
                         android:layout_alignBottom="@+id/etFotoE"
                         android:layout_alignLeft="@+id/btAddTelefonoE"
-                        android:layout_alignStart="@+id/btAddTelefonoE" />
+                        android:layout_alignStart="@+id/btAddTelefonoE"
+                        android:layout_weight="0.06" />
 
                 </LinearLayout>
 

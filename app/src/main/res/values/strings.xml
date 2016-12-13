@@ -41,4 +41,6 @@
     <string name="asuntoDelCorreo">Mail subject</string>
     <string name="textoCorreo">Mail text</string>
     <string name="listaVacia">List is empty</string>
+    <string name="faltaTelefono">Add a phone</string>
+    <string name="faltaFoto">Add a photo</string>
 </resources>
