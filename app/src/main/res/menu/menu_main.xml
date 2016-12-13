@@ -5,14 +5,14 @@
     <item
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="100"
-        android:title="Add"
+        android:title="@string/btAñadir"
         app:showAsAction="always"
         android:id="@+id/btAddContacto" />
 
     <item
         android:icon="@android:drawable/ic_menu_preferences"
         android:orderInCategory="100"
-        android:title="Preferencias"
+        android:title="@string/action_settings"
         app:showAsAction="always"
         android:id="@+id/btPreferences" />
 </menu>

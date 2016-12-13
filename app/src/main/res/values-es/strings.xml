@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agenda_contactos</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="lbNombre">Nombre</string>
+    <string name="lbTelefono">Telefono</string>
+    <string name="lbDireccion">Direccion</string>
+    <string name="lbEmail">Correo</string>
+    <string name="lbPagina">Pagina web</string>
+    <string name="lbFoto">Foto</string>
+    <string name="btAñadir">Añadir</string>
+    <string name="btBorrar">Borrar</string>
+    <string name="btModificar">Modificar</string>
+    <string name="btAcciones">Acciones</string>
+    <string name="btNuevoTelefono">Añadir telefono</string>
+    <string name="btNuevaFoto">Añadir foto</string>
+    <string name="prefCamara">Camara</string>
+    <string name="prefGaleria">Galeria</string>
+    <string name="prefTitulo">Obtener imagenes de:</string>
+
+    <string name="contactoAdd">Contacto añadido</string>
+    <string name="borrarFoto">¿Deseas borrar la foto?</string>
+    <string name="borrada">Borrada</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="error">Error</string>
+    <string name="fotoGuardada">Foto guardada</string>
+    <string name="telefonoGuardado">Telefono guardado</string>
+    <string name="borrado">Borrado</string>
+    <string name="llamar">Llamar</string>
+    <string name="queDeseasHacer">¿Que deseas hacer?</string>
+    <string name="contactoBorrado">Contacto borrado</string>
+    <string name="contactoModificado">Contacto modificado</string>
+    <string name="borrarContacto">¿Borrar contacto?</string>
+    <string name="llamarPorTelefono">Llamar por telefono</string>
+    <string name="mandarUnEmail">Mandar un correo</string>
+    <string name="visitarPagina">Visitar pagina web</string>
+    <string name="tomarUnaFoto">Tomar una foto</string>
+    <string name="noSeHaBorrado">No se ha borrado</string>
+    <string name="noHayTelefono">No se ha encontrado un telefono</string>
+    <string name="noHayEmail">No se ha encontrado un correo</string>
+    <string name="noHayPagina">No se ha encontrado una pagina web</string>
+    <string name="asuntoDelCorreo">Asunto del correo</string>
+    <string name="textoCorreo">Texto por Defecto del Correo</string>
+    <string name="listaVacia">La lista esta vacia</string>
+</resources>

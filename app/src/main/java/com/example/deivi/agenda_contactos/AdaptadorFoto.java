@@ -23,8 +23,7 @@ public class AdaptadorFoto extends BaseAdapter {
         this.lista = v;
         this.actividad = a;
     }
-// En el constructor de la clase se indica la actividad donde se ejecutará
-// y la lista de datos a visualizar.
+
     @Override
     public int getCount() {
         return lista.size();

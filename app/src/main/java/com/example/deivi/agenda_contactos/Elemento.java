@@ -36,6 +36,11 @@ public class Elemento implements Serializable {
         return bd.primerTelefono((int)id);
     }
     public String getFoto(BDContactos bd){return bd.primeraFoto((int)id);}
+    public String getNombreFoto(BDContactos bd){
+        String ruta = getFoto(bd);
+        return ruta.substring(ruta.lastIndexOf("/")+1);
+    }
+    public String getObservacionFoto(BDContactos bd){ return bd.comentarioPrimeraFoto((int)id); }
     public String getDireccion(){return direccion; }
     public String getEmail(){return email; }
     public String getPagina(){return pagina; }

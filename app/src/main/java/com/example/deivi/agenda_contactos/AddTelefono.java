@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ public class AddTelefono extends AppCompatActivity {
     static ArrayList<Telefonos> arrayListTel = new ArrayList();
     BDContactos bd;
     int idContacto;
-    //Elemento contacto;
 
     Button btAdd;
     @Override
@@ -71,7 +69,6 @@ public class AddTelefono extends AppCompatActivity {
     @Override
     protected void onRestart () {
         super.onRestart();
-        //Toast.makeText(this, "Lista recargada", Toast.LENGTH_SHORT).show();
 
         actualizaLista();
         a = null;
@@ -86,17 +83,17 @@ public class AddTelefono extends AppCompatActivity {
             for (int i = 0; i < bd.countTelefonosContacto(idContacto); i++) {
                 List<Telefonos> lista = bd.returnTelefonos(idContacto);
                 arrayListTel.add(lista.get(i));
-                System.out.println("actualizaLista ID: "+lista.get(i).getIdTelefonos());
+                //System.out.println("actualizaLista ID: "+lista.get(i).getIdTelefonos());
             }
-        else
-            System.out.println("No hay telefonos");
+        //else
+        //    System.out.println("No hay telefonos");
     }
 
     public void añadirTelefono(String telefono){
         if(bd.guardaTelefono(telefono, idContacto))
-            Toast.makeText(getApplicationContext(), "Telefono "+telefono+" guardado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.telefonoGuardado, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(getApplicationContext(), "Error guardando el telefono", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
     }
 
     public void borrarTelefono(int idTelefono){
@@ -112,24 +109,24 @@ public class AddTelefono extends AppCompatActivity {
     public void diaPulsado(final Telefonos tel) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("");
-        alert.setTitle("¿Que deseas hacer?");
+        alert.setTitle(R.string.queDeseasHacer);
 
-        alert.setPositiveButton("Llamar", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.llamar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 llamarTelefono(tel.getTelefono());
             }
         });
 
-        alert.setNeutralButton("Borrar", new DialogInterface.OnClickListener() {
+        alert.setNeutralButton(R.string.btBorrar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 borrarTelefono(tel.getIdTelefonos());
                 //actualizaTelContacto();
                 onRestart();
-                Toast.makeText(getApplicationContext(), "Borrado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.borrado, Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
             }
         });
@@ -140,28 +137,22 @@ public class AddTelefono extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittext = new EditText(getApplicationContext());
         alert.setMessage("");
-        alert.setTitle("Nuevo telefono");
+        alert.setTitle(R.string.btNuevoTelefono);
         alert.setView(edittext);
 
-        alert.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.btAñadir, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String telefono = edittext.getText().toString();
                 añadirTelefono(telefono);
-                //actualizaTelContacto();
                 onRestart();
-                //Toast.makeText(getApplicationContext(), "TELEFONO: "+telefono, Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
             }
         });
 
         alert.show();
     }
-    /*
-    public void actualizaTelContacto(){
-        contacto.setTelefono(bd.primerTelefono((int)contacto.getId()));
-    }*/
 }

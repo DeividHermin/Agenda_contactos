@@ -22,10 +22,9 @@ public class Fotos {
     public void setContactos_idContacto(int idC){ contactos_idContacto=idC; }
 
     public int getIdFoto(){ return idFoto; }
-    public String getNomFichero(){ return nomFichero; }
+    //public String getNomFichero(){ return  }
     public String getRutaFichero(){ return nomFichero; }
     public String getObservFoto(){ return observFoto; }
-    //public String getRuta(){ return ruta; }
     public int getContactos_idContacto(){ return contactos_idContacto; }
 
 }

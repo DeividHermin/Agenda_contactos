@@ -1,18 +1,9 @@
 package com.example.deivi.agenda_contactos;
 
 import android.app.ListActivity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatCallback;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.view.ActionMode;
@@ -24,10 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends ListActivity {
@@ -143,58 +130,19 @@ public class MainActivity extends ListActivity {
                 arrayList.add(bd.listado().get(i));
             }
         else
-            Toast.makeText(getApplicationContext(), "La lista está vacia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.listaVacia, Toast.LENGTH_SHORT).show();
     }
-
-
-    public String guardaFoto(Elemento el, Bitmap bitmapImage){
-        if (sdDisponible && sdAccesoEscritura) {
-            ContextWrapper cw = new ContextWrapper(getApplicationContext());
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            String nombreF = el.getNombre()+ el.getId()+bd.countFotosContacto((int)el.getId());
-            File f = new File(directory, nombreF);
-
-            FileOutputStream fos = null;
-            try {
-
-                fos = new FileOutputStream(f);
-                bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                fos.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return f.getAbsolutePath();
-        }
-
-        return null;
-    }
-
-    public static Bitmap cargaFoto(String path){
-        try {
-            File f=new File(path);
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            return b;
-        } catch (FileNotFoundException e){e.printStackTrace();}
-
-        return null;
-    }
-    /*
-    public void llamadaCall(View v) {
-        String telefono = "tel:";//+el.getTelefono(bd);
-        if(telefono.equals("")){
-            Toast.makeText(getApplicationContext(), "No se ha encontrado un telefono", Toast.LENGTH_SHORT).show();
-        }else{
-            Intent i = new Intent(Intent.ACTION_DIAL);
-            i.setData(Uri.parse(telefono));
-            startActivity(i);
-        }
-    }*/
 }
 
-//cambiar que el edittext del dialog de añadir telefono sea numerico
-//arreglar layouts
-//no guarda las tomadas de la galeria
-//girar la pantalla tras sacar una foto en el addFotos cierra el dialogo y no se puede añadir
-//añadir los 3 ejercicios
-//terminar las preferencias
-//arreglar getNombreFoto de Fotos o de Elementos
+/*
+cambiar que el edittext del dialog de añadir telefono sea numerico
+el texto de los edittext en los dialogos no se ve
+
+girar la pantalla tras sacar una foto en el addFotos cierra el dialogo y no se puede añadir
+borro fotos de la bd pero no de la carpeta donde las guardo /data/data/com.example.deivi.agenda_contactos/app_imageDir/yuyu10
+arreglar getNombreFoto de Fotos o de Elementos. arreglar añadir el comentario a editacontacto-foto
+
+añadir ejercicio NavigationDrawerConListView
+arreglar strings del dialogo acciones en editaContacto
+las fotos tomadas de la galeria generan un OutOfMemoryException
+*/

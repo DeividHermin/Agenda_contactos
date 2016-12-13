@@ -30,7 +30,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Nombre"
+                    android:text="@string/lbNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbNombre"
@@ -57,7 +57,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Telefono"
+                    android:text="@string/lbTelefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbTelefono"
@@ -103,7 +103,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Direccion"
+                    android:text="@string/lbDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbDireccion"
@@ -130,7 +130,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Email"
+                    android:text="@string/lbEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbEmail"
@@ -157,7 +157,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Pagina web"
+                    android:text="@string/lbPagina"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbPagina"
@@ -185,7 +185,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Foto"
+                    android:text="@string/lbFoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbFoto"
@@ -235,7 +235,7 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:text="Alta"
+                    android:text="@string/btAñadir"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btAlta"

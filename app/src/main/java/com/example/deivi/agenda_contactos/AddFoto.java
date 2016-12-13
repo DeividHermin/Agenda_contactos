@@ -6,9 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -21,7 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,37 +96,31 @@ public class AddFoto extends AppCompatActivity {
             for (int i = 0; i < bd.countFotosContacto(idContacto); i++) {
                 List<Fotos> lista = bd.returnFotos(idContacto);
                 arrayListFoto.add(lista.get(i));
-                System.out.println("actualizaLista ID: "+lista.get(i).getIdFoto());
+                //System.out.println("actualizaLista ID: "+lista.get(i).getIdFoto());
             }
-        else
-            System.out.println("No hay telefonos");
+        //else
+            //System.out.println("No hay telefonos");
     }
-
-
 
     public void borrarFoto(int idFoto){
         bd.borrarYordenarFoto(idFoto);
     }
 
-    public void llamarTelefono(String telefono){
-
-    }
-
     public void diaPulsado(final Fotos foto) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("");
-        alert.setTitle("¿Deseas borrar la foto?");
+        alert.setTitle(R.string.borrarFoto);
 
-        alert.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.btBorrar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 borrarFoto(foto.getIdFoto());
                 //actualizaTelContacto();
                 onRestart();
-                Toast.makeText(getApplicationContext(), "Borrado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.borrada, Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
             }
         });
@@ -138,14 +133,14 @@ public class AddFoto extends AppCompatActivity {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage("");
-        alert.setTitle("Nueva foto");
-        TextView tv = new TextView(getApplicationContext());
-        tv.setText("Observacion");
+        alert.setTitle(R.string.btNuevaFoto);
+        /*TextView tv = new TextView(getApplicationContext());
+        tv.setText("Observacion");*/
         final EditText edittext = new EditText(getApplicationContext());
-        alert.setView(tv);
+        //alert.setView(tv);
         alert.setView(edittext);
 
-        alert.setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.btAñadir, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String observacion= edittext.getText().toString();
                 String nombre;
@@ -160,7 +155,7 @@ public class AddFoto extends AppCompatActivity {
             }
         });
 
-        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
             }
         });
@@ -191,10 +186,12 @@ public class AddFoto extends AppCompatActivity {
         //imagen = (ImageView) findViewById(R.id.imagenEdita);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             imagen = (Bitmap) data.getExtras().get("data");
-        }
+    }
 
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
-            imagen = (Bitmap) data.getExtras().get("data");
+            try {
+                imagen = BitmapFactory.decodeStream(new BufferedInputStream(getContentResolver().openInputStream(data.getData())));
+            } catch (FileNotFoundException e) {}
         }
 
         if(resultCode==RESULT_OK)
@@ -208,6 +205,7 @@ public class AddFoto extends AppCompatActivity {
         //if (sdDisponible && sdAccesoEscritura) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        //System.out.println("DIRECTORIO: "+directory);
         String nombreF = nombre+ idContacto+bd.countFotosContacto(idContacto);
         File f = new File(directory, nombreF);
 
@@ -220,9 +218,9 @@ public class AddFoto extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String string = "Directory: "+directory+" file: "+nombreF+" f.absolutePath:"+f.getAbsolutePath();
-        Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
-        System.out.println(string);
+        //String string = "Directory: "+directory+" file: "+nombreF+" f.absolutePath:"+f.getAbsolutePath();
+        //Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
+        //System.out.println(string);
         añadirFotoBD(f.getAbsolutePath(), observacion);
         return f.getAbsolutePath();
         //}
@@ -231,8 +229,8 @@ public class AddFoto extends AppCompatActivity {
 
     public void añadirFotoBD(String foto, String observacion){
         if(bd.guardaFoto(foto, observacion, idContacto))
-            Toast.makeText(getApplicationContext(), "Foto "+foto+" guardado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.fotoGuardada, Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(getApplicationContext(), "Error guardando el telefono", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
     }
 }

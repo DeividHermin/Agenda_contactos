@@ -19,8 +19,6 @@ public class AddContacto extends AppCompatActivity {
     Button btTelefono, btFoto, btAlta;
     ImageView imagen;
     BDContactos bd;
-    //boolean creado;
-    //int idContacto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +53,13 @@ public class AddContacto extends AppCompatActivity {
             }
         });
         imagen = (ImageView)findViewById(R.id.imagenAdd);
-        //idContacto=(int)bd.returnId();
-        /*if(!creado) {
-            bd.insertarContacto(new Elemento(idContacto, "", "", "", "", "", ""));
-            creado=true;
-            Toast.makeText(getApplicationContext(), "insertado", Toast.LENGTH_SHORT).show();
-        }*/
-
     }
 
     @Override
     public void onBackPressed(){
         bd.borrarTelContacto((int)(bd.returnId()));
         bd.borrarFotosContacto((int)bd.returnId());
-        System.out.println("BORRANDO TELEFONOS DEL CONTACTO "+(bd.returnId()));
+        //System.out.println("BORRANDO TELEFONOS DEL CONTACTO "+(bd.returnId()));
         super.onBackPressed();
     }
 
@@ -79,9 +70,8 @@ public class AddContacto extends AppCompatActivity {
         String email =      etEmail.getText().toString();
         String pagina =     etPagina.getText().toString();
 
-        //bd.modificarContacto(new Elemento(idContacto, nombre, telefono, "", direccion, email, pagina));
         bd.insertarContacto(new Elemento(bd.returnId(), nombre, telefono, "", direccion, email, pagina));
-        Toast.makeText(getApplicationContext(), "Contacto añadido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.contactoAdd, Toast.LENGTH_SHORT).show();
 
         etNombre.setText("");
         etTelefono.setText("");

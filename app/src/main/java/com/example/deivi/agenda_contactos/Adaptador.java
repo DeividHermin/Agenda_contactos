@@ -33,8 +33,6 @@ public class Adaptador extends BaseAdapter {
         this.bd = bd;
     }
 
-    // En el constructor de la clase se indica la actividad donde se ejecutará
-// y la lista de datos a visualizar.
     @Override
     public int getCount() {
         return lista.size();
@@ -73,6 +71,7 @@ public class Adaptador extends BaseAdapter {
         File imgFile = new File(lista.get(position).getFoto(bd));
         if (imgFile.exists()) {
             ImageView imagenFoto = (ImageView) view.findViewById(R.id.imagen);
+            System.out.println(imgFile.getAbsolutePath());
             imagenFoto.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
             imagenFoto.setAdjustViewBounds(true);
         }

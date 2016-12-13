@@ -1,4 +1,44 @@
 <resources>
-    <string name="app_name">Agenda_contactos</string>
+    <string name="app_name">Contacts</string>
     <string name="action_settings">Settings</string>
+    <string name="lbNombre">Name</string>
+    <string name="lbTelefono">Phone</string>
+    <string name="lbDireccion">Address</string>
+    <string name="lbEmail">Email</string>
+    <string name="lbPagina">Webpage</string>
+    <string name="lbFoto">Photo</string>
+    <string name="btAñadir">Add</string>
+    <string name="btBorrar">Delete</string>
+    <string name="btModificar">Modify</string>
+    <string name="btAcciones">Actions</string>
+    <string name="btNuevoTelefono">Add phone</string>
+    <string name="btNuevaFoto">Add photo</string>
+    <string name="prefCamara">Camera</string>
+    <string name="prefGaleria">Galery</string>
+    <string name="prefTitulo">Get images from:</string>
+
+    <string name="contactoAdd">Contact added</string>
+    <string name="borrarFoto">Delete photo?</string>
+    <string name="borrada">Deleted</string>
+    <string name="cancelar">Cancel</string>
+    <string name="error">Error</string>
+    <string name="fotoGuardada">Photo saved</string>
+    <string name="telefonoGuardado">Phone saved</string>
+    <string name="borrado">Deleted</string>
+    <string name="llamar">Call</string>
+    <string name="queDeseasHacer">What do you want to do?</string>
+    <string name="contactoBorrado">Contact deleted</string>
+    <string name="contactoModificado">Contact modified</string>
+    <string name="borrarContacto">¿Delete contact?</string>
+    <string name="llamarPorTelefono">Call phone</string>
+    <string name="mandarUnEmail">Send email</string>
+    <string name="visitarPagina">Visit webpage</string>
+    <string name="tomarUnaFoto">Take a photo</string>
+    <string name="noSeHaBorrado">Not deleted</string>
+    <string name="noHayTelefono">Could not find phone</string>
+    <string name="noHayEmail">Could not find email</string>
+    <string name="noHayPagina">Could not find webpage</string>
+    <string name="asuntoDelCorreo">Mail subject</string>
+    <string name="textoCorreo">Mail text</string>
+    <string name="listaVacia">List is empty</string>
 </resources>

@@ -31,7 +31,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Nombre"
+                    android:text="@string/lbNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbNombre"
@@ -61,7 +61,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Telefono"
+                    android:text="@string/lbTelefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbTelefono"
@@ -87,17 +87,19 @@
                         android:layout_alignParentStart="true"
                         android:layout_toLeftOf="@+id/btAddTelefonoE"
                         android:layout_toStartOf="@+id/btAddTelefonoE"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
 
                     <Button
-                        android:layout_width="43dp"
+                        android:layout_width="46dp"
                         android:layout_height="match_parent"
                         android:id="@+id/btAddTelefonoE"
                         android:background="@android:drawable/ic_input_add"
                         android:layout_alignBottom="@+id/etFotoE"
                         android:layout_alignLeft="@+id/btAddTelefonoE"
-                        android:layout_alignStart="@+id/btAddTelefonoE"
-                        android:layout_weight="0.06"  />
+                        android:layout_alignStart="@+id/btAddTelefonoE" />
 
                 </LinearLayout>
 
@@ -110,7 +112,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Direccion"
+                    android:text="@string/lbDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbDireccion"
@@ -140,7 +142,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Email"
+                    android:text="@string/lbEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbEmail"
@@ -170,7 +172,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Pagina web"
+                    android:text="@string/lbPagina"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbPagina"
@@ -200,7 +202,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Foto"
+                    android:text="@string/lbFoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbFoto"
@@ -225,7 +227,10 @@
                         android:layout_alignParentStart="true"
                         android:layout_toLeftOf="@+id/btAddFotoE"
                         android:layout_toStartOf="@+id/btAddFotoE"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
 
                     <Button
                         android:layout_width="43dp"
@@ -256,7 +261,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:text="Baja"
+                    android:text="@string/btBorrar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btBaja"
@@ -264,7 +269,7 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:text="Modificar"
+                    android:text="@string/btModificar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btModificar"
@@ -272,7 +277,7 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:text="Acciones"
+                    android:text="@string/btAcciones"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btAcciones"

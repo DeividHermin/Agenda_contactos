@@ -5,14 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by Deivi on 02/12/2016.
@@ -97,7 +93,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             db.execSQL("INSERT INTO "+NOMBRE_TABLAT+" VALUES ("+idTelefono+", '"+telefono+"', "+idContacto+")");
-            System.out.println("Se guarda ID:"+idTelefono);
+            //System.out.println("Se guarda ID:"+idTelefono);
             return true;
         }
         db.close();
@@ -126,7 +122,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
             //System.out.println("borrado idTelefonos=" + index);
             for(int i=index; i<tamanioTablaf; i++) {
                 db.execSQL("UPDATE " + NOMBRE_TABLAT + " SET idTelefonos=" + i + " WHERE idTelefonos=" + (i + 1));
-                System.out.println("UPDATE " + NOMBRE_TABLAT + " SET idTelefonos=" + i + " WHERE idTelefonos=" + (i + 1));
+                //System.out.println("UPDATE " + NOMBRE_TABLAT + " SET idTelefonos=" + i + " WHERE idTelefonos=" + (i + 1));
             }
         }
 
@@ -144,12 +140,12 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         if (db != null) {
             nreg_afectados=0;
             Cursor c = db.rawQuery("SELECT idTelefonos FROM "+NOMBRE_TABLAT+" WHERE contactos_idContacto="+idContacto, null);
-            System.out.println("SELECT idTelefonos FROM "+NOMBRE_TABLAT+" WHERE contactos_idContacto="+idContacto);
+            //System.out.println("SELECT idTelefonos FROM "+NOMBRE_TABLAT+" WHERE contactos_idContacto="+idContacto);
             borrar = new int[c.getColumnCount()+1];
             for(int i=0; c.moveToNext(); i++){
                 borrar[i]=c.getInt(0);
                 contador++;
-                System.out.println("Se borrara ID:"+c.getInt(0));
+                //System.out.println("Se borrara ID:"+c.getInt(0));
                 nreg_afectados++;
             }
         }
@@ -157,7 +153,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
 
         if(contador>0)
             for (int i=0; i<contador; i++) {
-                System.out.println("borrarYordenarTelefono(["+borrar[i]+"])");
+                //System.out.println("borrarYordenarTelefono(["+borrar[i]+"])");
                 borrarYordenarTelefono(borrar[i]);
             }
 
@@ -212,7 +208,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             db.execSQL("INSERT INTO "+NOMBRE_TABLAF+" VALUES ("+idFoto+", '"+nombre+"', '"+observacion+"', "+idContacto+")");
-            System.out.println("Se guarda ID:"+idFoto);
+            //System.out.println("Se guarda ID:"+idFoto);
             return true;
         }
         db.close();
@@ -231,6 +227,18 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         return foto;
     }
 
+    public String comentarioPrimeraFoto(int idContacto){
+        String foto = "";
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            Cursor c = db.rawQuery("SELECT observFoto FROM "+NOMBRE_TABLAF+" WHERE contactos_idContacto="+idContacto, null);
+            if(c.moveToNext())
+                foto=c.getString(0);
+        }
+        db.close();
+        return foto;
+    }
+
     public long borrarYordenarFoto(int index){
         tamanioTablaf=(int)returnIdFoto()-1;
 
@@ -241,7 +249,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
             //System.out.println("borrado idTelefonos=" + index);
             for(int i=index; i<tamanioTablaf; i++) {
                 db.execSQL("UPDATE " + NOMBRE_TABLAF + " SET idFoto=" + i + " WHERE idFoto=" + (i + 1));
-                System.out.println("UPDATE " + NOMBRE_TABLAF + " SET idFoto=" + i + " WHERE idFoto=" + (i + 1));
+                //System.out.println("UPDATE " + NOMBRE_TABLAF + " SET idFoto=" + i + " WHERE idFoto=" + (i + 1));
             }
         }
 
@@ -259,12 +267,12 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
         if (db != null) {
             nreg_afectados=0;
             Cursor c = db.rawQuery("SELECT idFoto FROM "+NOMBRE_TABLAF+" WHERE contactos_idContacto="+idContacto, null);
-            System.out.println("SELECT idFoto FROM "+NOMBRE_TABLAF+" WHERE contactos_idContacto="+idContacto);
+            //System.out.println("SELECT idFoto FROM "+NOMBRE_TABLAF+" WHERE contactos_idContacto="+idContacto);
             borrar = new int[c.getColumnCount()+1];
             for(int i=0; c.moveToNext(); i++){
                 borrar[i]=c.getInt(0);
                 contador++;
-                System.out.println("Se borrara ID:"+c.getInt(0));
+                //System.out.println("Se borrara ID:"+c.getInt(0));
                 nreg_afectados++;
             }
         }
@@ -272,7 +280,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
 
         if(contador>0)
             for (int i=0; i<contador; i++) {
-                System.out.println("borrarYordenarFoto(["+borrar[i]+"])");
+                //System.out.println("borrarYordenarFoto(["+borrar[i]+"])");
                 borrarYordenarFoto(borrar[i]);
             }
 
@@ -318,23 +326,6 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
 
         return existe;
     }
-    public long borrarContacto(int index){
-        tamanioTablac=(int)returnId()-1;
-        long nreg_afectados = -1;
-        SQLiteDatabase db = getWritableDatabase();
-        if (db != null) {
-            nreg_afectados = db.delete(NOMBRE_TABLAC, "idContacto=" + index, null);
-            borrarTelContacto(index);
-            borrarFotosContacto(index);
-            //db.delete(NOMBRE_TABLAT, "contactos_idContacto=" + index, null);
-            //db.delete(NOMBRE_TABLAF, "contactos_idContacto=" + index, null);
-        }
-
-        if(nreg_afectados>0)
-            tamanioTablac=tamanioTablac-(int)nreg_afectados;
-        db.close();
-        return nreg_afectados;
-    }
 
     public long borrarYordenar(int index){
         tamanioTablac=(int)returnId()-1;
@@ -371,7 +362,7 @@ public class BDContactos extends SQLiteOpenHelper implements Serializable{
             ContentValues valores = new ContentValues();
             valores.put("nombre", e.getNombre());
             valores.put("idContacto", e.getId());
-            System.out.println("INSERTADO CONTACTO "+e.getId());
+            //System.out.println("INSERTADO CONTACTO "+e.getId());
             valores.put("direccion", e.getDireccion());
             valores.put("email", e.getEmail());
             valores.put("webBlog", e.getPagina());
